@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Avnish • Portfolio</title>
+    <meta name="description" content="Avnish - web developer portfolio" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ===========================
+       Variables & base
+       =========================== */
+      :root {
+        --bg: #071028;
+        --panel: rgba(255, 255, 255, 0.03);
+        --muted: #94a0c4;
+        --text: #eaf0ff;
+        --brand-a: #f7a0ff;
+        --brand-b: #5b8cff;
+        --radius: 12px;
+        --maxw: 1100px;
+        --nav-h: 64px; /* synced with JS */
+        --gap: 18px;
+        --ease: cubic-bezier(0.2, 0.9, 0.2, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+          sans-serif;
+        background: radial-gradient(
+              1200px 600px at 80% -10%,
+              #24305a 0%,
+              transparent 60%
+            )
+            no-repeat,
+          radial-gradient(900px 500px at 0% 0%, #1a2346 0%, transparent 55%)
+            no-repeat,
+          var(--bg);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      .container {
+        width: min(100%, var(--maxw));
+        margin-inline: auto;
+        padding: 0 16px;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* ===========================
+       Header / nav
+       =========================== */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(8px) saturate(140%);
+        background: linear-gradient(
+          to bottom,
+          rgba(7, 16, 40, 0.92),
+          rgba(7, 16, 40, 0.6)
+        );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      .nav-row {
+        height: var(--nav-h);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .brand-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+        box-shadow: 0 8px 30px rgba(91, 140, 255, 0.12);
+      }
+
+      nav.primary {
+        display: none;
+        gap: 18px;
+        align-items: center;
+      }
+      nav.primary a {
+        padding: 8px 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        color: var(--text);
+        transition: transform 0.12s var(--ease), background 0.12s var(--ease);
+      }
+      nav.primary a:hover {
+        background: rgba(255, 255, 255, 0.04);
+        transform: translateY(-3px);
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 10px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      .mobile-nav {
+        display: none;
+        gap: 10px;
+        padding: 12px;
+        flex-direction: column;
+        width: 100%;
+      }
+      .mobile-nav a,
+      .mobile-nav button {
+        display: block;
+        text-align: left;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        background: var(--panel);
+        color: var(--text);
+        font-weight: 600;
+      }
+      .mobile-nav .close-btn {
+        justify-content: center;
+      }
+
+      /* ===========================
+       Hero / Home
+       =========================== */
+      main {
+        padding-top: 18px;
+      }
+      #home {
+        min-height: calc(100vh - var(--nav-h));
+        align-items: center;
+        padding: 30px 16px;
+        scroll-margin-top: 350px;
+      }
+
+      .hero {
+        width: 100%;
+        max-width: 1200px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .hero-left {
+        text-align: center;
+      }
+      .eyebrow {
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      h1 {
+        margin: 6px 0;
+        font-size: clamp(26px, 6vw, 40px);
+        line-height: 1.02;
+      }
+      .name {
+        color: #ff9bd2;
+        font-weight: 800;
+      }
+      .lead {
+        margin: 0 0 14px;
+        color: rgba(215, 226, 255, 0.95);
+        font-size: clamp(14px, 3.6vw, 16px);
+      }
+
+      .cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+      }
+      .btn-primary {
+        background: linear-gradient(90deg, var(--brand-a), var(--brand-b));
+        color: #1e0f22;
+        box-shadow: 0 10px 30px rgba(91, 140, 255, 0.12);
+      }
+      .btn-primary:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px rgba(91, 140, 255, 0.18);
+      }
+      .btn-outline {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--text);
+      }
+      .btn-outline:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .hero-right {
+        display: flex;
+        justify-content: center;
+      }
+      .portrait-wrap {
+        width: min(86vw, 360px);
+        margin-inline: auto;
+        border-radius: 999px;
+        padding: 8px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+        overflow: hidden;
+        transform: translateZ(0);
+        opacity: 0;
+        transform-origin: center;
+        transition: opacity 0.7s var(--ease), transform 0.9s var(--ease);
+      }
+      .portrait {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 999px;
+        object-fit: cover;
+        aspect-ratio: 3/4;
+      }
+
+      /* reveal states (JS toggles .is-visible) */
+      .portrait-wrap.is-visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .portrait-wrap {
+        transform: scale(0.98);
+      }
+
+      /* ===========================
+       Sections
+       =========================== */
+      section {
+        padding-block: 65px 44px;
+        scroll-margin-top: (var(--nav-h));
+      }
+      .section-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 14px;
+        align-items: center;
+      }
+      .section-heading h2 {
+        margin: 0;
+        font-size: clamp(20px, 4.2vw, 28px);
+      }
+      .muted {
+        color: var(--muted);
+      }
+
+      .fade-in {
+        transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+        scroll-margin-top: 300px;
+      }
+      .fade-in.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* About */
+      .about .cols {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1fr;
+      }
+      .card {
+        background: var(--panel);
+        border-radius: 12px;
+        padding: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        color: rgba(223, 231, 255, 0.95);
+        transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+      }
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      /* Projects */
+      .projects-grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1fr;
+        margin-top: 8px;
+      }
+      .project {
+        background: var(--panel);
+        border-radius: 12px;
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+      }
+      .project:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      }
+      .thumb {
+        height: 140px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #0f2445, #141b3d);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        margin-bottom: 10px;
+      }
+
+      /* Contact */
+      .contact-wrap {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1fr;
+      }
+      .actions {
+        display: grid;
+        gap: 10px;
+      }
+      .action {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        text-decoration: none;
+        transition: transform 0.12s var(--ease);
+      }
+      .action:hover {
+        transform: translateY(-4px);
+      }
+      .contact-form {
+        display: grid;
+        gap: 10px;
+        background: var(--panel);
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      .input,
+      textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        font: inherit;
+      }
+      textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+      .send-btn {
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        background: linear-gradient(90deg, var(--brand-a), var(--brand-b));
+        color: #1e0f22;
+        font-weight: 700;
+        transition: transform 0.14s var(--ease);
+      }
+      .send-btn:hover {
+        transform: translateY(-3px);
+      }
+
+      /* Footer */
+      footer {
+        padding-block: 36px 48px;
+        color: var(--muted);
+        border-top: 1px solid rgba(255, 255, 255, 0.03);
+        text-align: center;
+      }
+
+      /* ===========================
+       Larger screens
+       =========================== */
+      @media (min-width: 720px) {
+        nav.primary {
+          display: flex;
+        }
+        .menu-toggle {
+          display: none;
+        }
+        .mobile-nav {
+          display: none !important;
+        }
+
+        .hero {
+          grid-template-columns: 1fr 420px;
+          gap: 28px;
+          padding-block: 5px;
+          align-items: center;
+        }
+        .hero-left {
+          text-align: left;
+        }
+        .hero-left .cta {
+          justify-content: flex-start;
+        }
+
+        .about .cols {
+          grid-template-columns: repeat(3, 1fr);
+          text-align: center;
+        }
+        .projects-grid {
+          grid-template-columns: repeat(3, 1fr);
+          text-align: center;
+        }
+        .contact-wrap {
+          grid-template-columns: 1fr 420px;
+          align-items: start;
+        }
+        footer {
+          text-align: center;
+          margin: 20px;
+        }
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        border: 0;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container nav-row" role="banner">
+        <a class="brand" href="#home" aria-label="Homepage">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span>Avnish's Portfolio</span>
+        </a>
+
+        <!-- Desktop nav -->
+        <nav class="primary" aria-label="Primary navigation">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- Mobile toggle -->
+        <button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+          aria-label="Open menu"
+        >
+          Menu
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <nav
+        id="mobileMenu"
+        class="mobile-nav container"
+        aria-label="Mobile navigation"
+        hidden
+      >
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <button
+          id="mobileClose"
+          class="menu-toggle close-btn"
+          aria-label="Close menu"
+        >
+          Close
+        </button>
+      </nav>
+    </header>
+
+    <!-- Main / Hero -->
+    <main class="container" role="main">
+      <section id="home" class="hero" aria-labelledby="intro">
+        <div class="hero-left">
+          <div class="eyebrow">INTRO</div>
+          <h1 id="intro">Hi, my name is <span class="name">Avnish</span></h1>
+          <p class="lead">and I'm a passionate Web Developer.</p>
+
+          <div class="cta">
+            <!-- Buttons from index 2.html kept intact -->
+            <a
+              class="btn btn-primary"
+              href="resume.pdf"
+              target="_blank"
+              rel="noopener"
+              >Resume</a
+            >
+            <a class="btn btn-outline" href="#contact">Contact Me</a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="portrait-wrap fade-in" id="portraitWrap">
+            <img
+              class="portrait"
+              src="Portfolio.JPG"
+              alt="Portrait of Avnish"
+              loading="lazy"
+              width="640"
+              height="853"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="fade-in" aria-labelledby="about-heading">
+        <div class="section-heading">
+          <div class="eyebrow">About</div>
+          <h2 id="about-heading">Who I am</h2>
+        </div>
+
+        <div class="about container">
+          <div class="cols">
+            <div class="card">
+              <h3>WHO AM I</h3>
+              <p>
+                I'm Avnish, a web developer with a strong foundation in HTML,
+                CSS, and JavaScript. I recently completed a certification and
+                I'm excited to start building real-world projects.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>WHAT I'VE LEARNED</h3>
+              <p>
+                I've worked on front-end fundamentals, responsive design, and
+                JavaScript basics. I'm also learning modern tools like Git, VS
+                Code, and frameworks step by step.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>WHAT I AM LOOKING FOR</h3>
+              <p>
+                Right now, I'm focusing on creating practical projects to
+                sharpen my skills. I'm open to internships, collaborations, and
+                opportunities where I can contribute while learning from
+                real-world challenges.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="fade-in" aria-labelledby="projects-heading">
+        <div class="section-heading container">
+          <div class="eyebrow">Projects</div>
+          <h2 id="projects-heading">Things I've built</h2>
+        </div>
+
+        <div class="projects-grid container">
+          <article class="project" aria-labelledby="p1">
+            <div
+              class="thumb"
+              role="img"
+              aria-label="Project 1 thumbnail"
+            ></div>
+            <h3 id="p1">Project One</h3>
+            <p>Coming soon.</p>
+          </article>
+
+          <article class="project" aria-labelledby="p2">
+            <div
+              class="thumb"
+              role="img"
+              aria-label="Project 2 thumbnail"
+            ></div>
+            <h3 id="p2">Project Two</h3>
+            <p>Coming soon.</p>
+          </article>
+
+          <article class="project" aria-labelledby="p3">
+            <div
+              class="thumb"
+              role="img"
+              aria-label="Project 3 thumbnail"
+            ></div>
+            <h3 id="p3">Project Three</h3>
+            <p>Coming soon.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="fade-in" aria-labelledby="contact-heading">
+        <div class="section-heading container">
+          <div class="eyebrow">Contact</div>
+          <h2 id="contact-heading">Let's talk</h2>
+        </div>
+
+        <div class="contact-wrap container">
+          <div class="actions" aria-label="Quick contact links">
+            <a class="action" href="tel:+917464992126">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.03-.24c1.12.37 2.33.57 3.56.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C11.3 22 2 12.7 2 1a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.23.2 2.44.57 3.56a1 1 0 0 1-.24 1.03z"
+                ></path>
+              </svg>
+              <span>+91 74649 92126</span>
+            </a>
+
+            <a
+              class="action"
+              href="mailto:avanishmourya6@gmail.com?subject=Portfolio%20Inquiry"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 4-8 5L4 8V6l8 5l8-5z"
+                ></path>
+              </svg>
+              <span>avanishmourya6@gmail.com</span>
+            </a>
+
+            <a
+              class="action"
+              href="https://www.instagram.com/offx._avnish_"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5m5 5a5 5 0 1 0 0 10a5 5 0 0 0 0-10m0 2.2A2.8 2.8 0 1 1 9.2 12A2.8 2.8 0 0 1 12 9.2M17.5 6.5a1 1 0 1 0 1 1a1 1 0 0 0-1-1Z"
+                ></path>
+              </svg>
+              <span>@offx._avnish_</span>
+            </a>
+
+            <a
+              class="action"
+              href="https://x.com/offx_avnish_"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <g fill="currentColor">
+                  <rect
+                    x="10.4"
+                    y="2"
+                    width="3.2"
+                    height="20"
+                    rx="1.6"
+                    transform="rotate(45 12 12)"
+                  ></rect>
+                  <rect
+                    x="10.4"
+                    y="2"
+                    width="3.2"
+                    height="20"
+                    rx="1.6"
+                    transform="rotate(-45 12 12)"
+                  ></rect>
+                </g>
+              </svg>
+              <span>@offx_avnish_</span>
+            </a>
+
+            <a
+              class="action"
+              href="https://www.linkedin.com/in/avanishmourya"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M20.45 3H3.55C2.7 3 2 3.7 2 4.55v14.9C2 20.3 2.7 21 3.55 21h16.9c.85 0 1.55-.7 1.55-1.55V4.55C22 3.7 21.3 3 20.45 3zM8.2 18.2H5.8V9.7h2.4v8.5zM7 8.5c-.8 0-1.3-.6-1.3-1.3S6.2 6 7 6s1.3.6 1.3 1.2S7.8 8.5 7 8.5zm12 9.7h-2.4v-4.6c0-1.1 0-2.5-1.5-2.5s-1.7 1.2-1.7 2.4v4.7H11V9.7h2.3v1.2h.1c.3-.5 1.2-1.3 2.5-1.3 2.7 0 3.2 1.8 3.2 4.1v4.6z"
+                ></path>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+
+            <p class="muted" style="margin-top: 6px">
+              Can't use the form? Email me at
+              <strong>avanishmourya6@gmail.com</strong>.
+            </p>
+          </div>
+
+          <!-- contact form -->
+          <form
+            class="contact-form"
+            action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+            method="POST"
+            aria-label="Contact form"
+          >
+            <h3 style="margin: 0 0 6px 0">Send a message</h3>
+
+            <label class="sr-only" for="c-name">Name</label>
+            <input
+              id="c-name"
+              class="input"
+              name="name"
+              type="text"
+              placeholder="Your name"
+              required
+            />
+
+            <label class="sr-only" for="c-email">Email</label>
+            <input
+              id="c-email"
+              class="input"
+              name="_replyto"
+              type="email"
+              placeholder="you@example.com"
+              required
+            />
+
+            <label class="sr-only" for="c-message">Message</label>
+            <textarea
+              id="c-message"
+              name="message"
+              class="input"
+              placeholder="Write your message..."
+              required
+            ></textarea>
+
+            <input
+              type="text"
+              name="_gotcha"
+              class="sr-only"
+              tabindex="-1"
+              autocomplete="off"
+            />
+
+            <button class="send-btn" type="submit">Send</button>
+            <small class="muted"
+              >Form uses Formspree. Replace <code>YOUR_FORMSPREE_ID</code> to
+              receive messages.</small
+            >
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="container" role="contentinfo">
+      <div
+        style="
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+        "
+      >
+        <div>© <span id="year"></span> Avnish Kumar. All rights reserved.</div>
+        <div style="display: inline-flex; gap: 10px; align-items: center">
+          <a
+            href="https://www.instagram.com/offx._avnish_"
+            target="_blank"
+            rel="noopener"
+            >Instagram</a
+          >
+          <a href="https://x.com/offx_avnish_" target="_blank" rel="noopener"
+            >X</a
+          >
+          <a
+            href="https://www.linkedin.com/in/avanishmourya"
+            target="_blank"
+            rel="noopener"
+            >LinkedIn</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      /* -------------------------
+       Footer year
+       ------------------------- */
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      /* -------------------------
+       Sync header height to CSS var --nav-h
+       ------------------------- */
+      (function syncNavHeight() {
+        const header = document.querySelector("header");
+        function apply() {
+          if (!header) return;
+          document.documentElement.style.setProperty(
+            "--nav-h",
+            header.offsetHeight + "px"
+          );
+        }
+        window.addEventListener("load", apply);
+        window.addEventListener("resize", apply);
+        apply();
+      })();
+
+      /* -------------------------
+       Mobile menu behaviour
+       ------------------------- */
+      (function mobileMenu() {
+        const toggle = document.querySelector(".menu-toggle");
+        const mobileMenu = document.getElementById("mobileMenu");
+        const mobileClose = document.getElementById("mobileClose");
+
+        if (!toggle || !mobileMenu) return;
+
+        function openMenu() {
+          mobileMenu.hidden = false;
+          mobileMenu.style.display = "flex";
+          toggle.setAttribute("aria-expanded", "true");
+          const first = mobileMenu.querySelector("a");
+          if (first) first.focus();
+        }
+        function closeMenu() {
+          mobileMenu.hidden = true;
+          mobileMenu.style.display = "";
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.focus();
+        }
+
+        toggle.addEventListener("click", () => {
+          const isOpen = toggle.getAttribute("aria-expanded") === "true";
+          if (isOpen) closeMenu();
+          else openMenu();
+        });
+
+        mobileClose && mobileClose.addEventListener("click", closeMenu);
+
+        mobileMenu.querySelectorAll("a").forEach((a) => {
+          a.addEventListener("click", () => setTimeout(closeMenu, 90));
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && !mobileMenu.hidden) closeMenu();
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth >= 720 && !mobileMenu.hidden) closeMenu();
+        });
+      })();
+
+      /* -------------------------
+       Reveal on scroll (IntersectionObserver)
+       ------------------------- */
+      (function revealOnScroll() {
+        const obsOptions = { root: null, rootMargin: "0px", threshold: 0.12 };
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              entry.target.classList.add("fade-in-visible"); // legacy-safe
+              entry.target.classList.add("is-visible"); // ensure portrait also picks up
+              observer.unobserve(entry.target);
+            }
+          });
+        }, obsOptions);
+
+        // Observe visible elements
+        document
+          .querySelectorAll(".fade-in")
+          .forEach((el) => observer.observe(el));
+        // portrait specific
+        const p = document.getElementById("portraitWrap");
+        if (p) observer.observe(p);
+      })();
+      //scroll smoth//
+      function applyScrollMargin() {
+        const sections = document.querySelectorAll("section");
+        if (window.matchMedia("(max-width:768px)").matches) {
+          section.forEach((sec) => {
+            sec.style.scrollMarginTop = "100px";
+          });
+          console.log("Applied mobile scroll margin");
+        } else {
+          sections.forEach((sec) => {
+            sec.style.scrollMarginTop = "75px";
+          });
+          console.log("Applied desktop scroll margin");
+        }
+      }
+      applyScrollMargin();
+      window.addEventListener("resize", applyScrollMargin);
+    </script>
+  </body>
+</html>
