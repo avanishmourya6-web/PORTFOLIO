@@ -333,6 +333,7 @@ section {
 }
 .thumb {
   height: 140px;
+  width: 100%;
   border-radius: 10px;
   background: linear-gradient(135deg, #0f2445, #141b3d);
   border: 1px solid rgba(255, 255, 255, 0.05);
